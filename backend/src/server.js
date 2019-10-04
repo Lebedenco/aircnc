@@ -1,16 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const dotenv = require('dotenv');
 const path = require("path");
-
 const routes = require("./routes");
-const config = require("./config/config.json");
 
 const app = express();
 const port = process.env.PORT || 3333;
-const url = config.db.url;
 
-mongoose.connect(url, { 
+dotenv.config();
+
+mongoose.connect(process.env.DB_CONNECT, {
   useNewUrlParser: true,
   useUnifiedTopology: true
  });
