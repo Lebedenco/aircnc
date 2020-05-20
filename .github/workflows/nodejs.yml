@@ -24,6 +24,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+      env:
+        DB_CONNECT: ${{ secrets.DB_CONNECT }}
     - run: npm --prefix ./backend install ./backend
     - run: npm --prefix ./backend run build --if-present
     - run: npm --prefix ./backend test
