@@ -17,17 +17,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: create env file
-      run: |
-        touch .env
-        echo DB_CONNECT=${{ secrets.dbConnect }} >> .env  
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-      env: 
-        DB_CONNECT: ${{ secrets.dbConnect }}
     - run: npm --prefix ./backend install ./backend
     - run: npm --prefix ./backend run build --if-present
+      env: 
+        DB_CONNECT: ${{ secrets.dbConnect }}
     - run: npm --prefix ./backend test
     
